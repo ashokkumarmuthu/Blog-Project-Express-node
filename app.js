@@ -3,6 +3,7 @@
 const express = require("express");
 const bodyparser = require("body-parser");
 const ejs = require("ejs");
+const _ = require("lodash");
 
 const homeStartingContent = "Main Page";
 const aboutStartingContent = "About Page";
@@ -37,6 +38,16 @@ app.get("/contact", function(req,res){
 
 app.get("/compose", function(req,res){
     res.render("compose");
+});
+
+app.get("/posts/:name",function(req,res){
+    const reqName = _.lowerCase(req.params.name);
+    for(let i=0;i<tasks.length;i++){
+        const stored = _.lowerCase(tasks[i].title);
+        if(reqName === stored){
+            res.render("post",{title:tasks[i].title, body:tasks[i].body});
+        }
+    }
 });
 
 app.post("/compose",function(req,res){

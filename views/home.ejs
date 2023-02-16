@@ -4,7 +4,9 @@
 <p><%= startingContent %></p>
 <% tasks.forEach(function(task) { %>
     <h1><%= task.title %></h1>
-    <p><%= task.body %></p>
+    <p><%= task.body.substring(0,100) + " ..."%>
+    <a href="/posts/<%=task.title%>">Read More</a>
+    </p>
 <% }); %>
 
 <%- include('partial/footer'); -%>
